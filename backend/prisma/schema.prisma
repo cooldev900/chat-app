@@ -10,7 +10,6 @@ datasource db {
 model Message {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
-  username  String
-  createdAt DateTime @default(now())
-  likes     Int      @default(0) // Default likes count
+  name  String
+  createdAt Int    @default(0)
 }
