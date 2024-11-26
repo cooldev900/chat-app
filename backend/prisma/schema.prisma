@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  username  String
+  createdAt DateTime @default(now())
+  likes     Int      @default(0) // Default likes count
+}
