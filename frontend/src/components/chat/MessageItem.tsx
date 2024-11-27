@@ -11,6 +11,7 @@ const Container = styled(Box)<{ isSender: boolean }>(({ theme, isSender }) => ({
   display: 'flex',
   justifyContent: isSender ? 'flex-end' : 'flex-start',
   marginBottom: theme.spacing(2),
+  width: '100%'
 }));
 
 const MessageBubble = styled(Box)<{ isSender: boolean }>(({ theme, isSender }) => ({
@@ -24,7 +25,7 @@ const MessageBubble = styled(Box)<{ isSender: boolean }>(({ theme, isSender }) =
     flexDirection: 'column',
   
     [theme.breakpoints.down('sm')]: {
-      maxWidth: '80%', // Adjust for mobile devices
+      maxWidth: '80%', 
     },
   }));
 
@@ -34,16 +35,12 @@ const SenderName = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(0.5),
 }));
 
-const MessageText = styled(Typography)(() => ({
-  wordBreak: 'break-word',
-}));
-
 const MessageItem: React.FC<MessageItemProps> = ({ name, message, isSender }) => {
   return (
     <Container isSender={isSender}>
       <MessageBubble isSender={isSender}>
         {!isSender && <SenderName>{name}</SenderName>}
-        <MessageText>{message}</MessageText>
+        <Typography>{message}</Typography>
       </MessageBubble>
     </Container>
   );

@@ -119,6 +119,7 @@ const TopBarAndSideBarLayout: FunctionComponent<Props> = ({ children, sidebarIte
         paddingLeft={1}
         paddingRight={1}
         paddingTop={1}
+        height={`calc(100vh - ${TOP_BAR_DESKTOP_HEIGHT})`}
       >
         <ErrorBoundary name="Content">
           {/* Always Render Router's Outlet*/}

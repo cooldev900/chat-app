@@ -2,20 +2,31 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { PrismaClient } from "@prisma/client";
+import cors from 'cors';
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: false,
+  },
+});
 const prisma = new PrismaClient();
 
-// Middleware
+const corsOptions = {
+  origin: "*",
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // API route to fetch all messages
 app.get("/api/messages", async (req, res) => {
   try {
     const messages = await prisma.message.findMany({
-      orderBy: { createdAt: "asc" }, // Sort messages by creation time
+      orderBy: { createdAt: "asc" },
     });
     res.json(messages);
   } catch (error) {
@@ -28,24 +39,20 @@ app.get("/api/messages", async (req, res) => {
 io.on("connection", (socket) => {
   console.log(`Client connected: ${socket.id}`);
 
-  // Listen for "send_message" event
   socket.on("send_message", async (data: { name: string; content: string }) => {
     const { name, content } = data;
 
     try {
-      // Save the message to the database
       const newMessage = await prisma.message.create({
         data: { name, content, createdAt: new Date().getTime() },
       });
 
-      // Broadcast the new message to all connected clients
-      io.emit("new_message", newMessage);
+      io.emit("new_message", {...newMessage, socketId: socket.id});
     } catch (error) {
       console.error("Error saving message:", error);
     }
   });
 
-  // Handle client disconnect
   socket.on("disconnect", () => {
     console.log(`Client disconnected: ${socket.id}`);
   });
