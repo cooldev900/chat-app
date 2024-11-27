@@ -1,13 +1,8 @@
 {
+  "name": "frontend",
   "type": "module",
-  "name": "react-mui-vite-ts",
   "version": "0.3.15",
   "description": "Starter project for Vite with React + MUI using TypeScript",
-  "author": {
-    "name": "Anton Karpenko",
-    "email": "i@karpolan.com",
-    "url": "https://karpolan.com"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -18,7 +13,7 @@
     "type": "tsc",
     "test:jest": "jest",
     "test:vitest": "vitest",
-    "test": "npm run test:vitest"
+    "test": "npm run test:jest"
   },
   "dependencies": {
     "@emotion/react": "latest",
