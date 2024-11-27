@@ -41,6 +41,7 @@ const StyledTextField = styled(TextField)`
 
   & .MuiInputBase-root {
     background-color: white;
+    color: black;
   }
 
   width: 80%;

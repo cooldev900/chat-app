@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, CircularProgress, styled } from '@mui/material';
 import MessageItem from './MessageItem';
 import MessageInputer from './MessageInputer';
@@ -46,11 +46,22 @@ const MessagePanel = styled(Box)(() => ({
 const MessageBoard: React.FC = () => {
   const [socketId, setSocketId] = useState<string | undefined>();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(true); // State to handle loading
+  const [loading, setLoading] = useState(true);
+  const messageListRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = (name: string, message: string) => {
     if (socketId) socket.emit('send_message', { name, content: message });
   };
+
+  const scrollToBottom = () => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useEffect(() => {
     // Listen for socket connection
@@ -101,7 +112,7 @@ const MessageBoard: React.FC = () => {
   return (
     <Container>
       <MessagePanel>
-        <MessageList>
+        <MessageList ref={messageListRef}>
           {messages.map((msg) => (
             <MessageItem
               key={msg.id}
