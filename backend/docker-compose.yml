@@ -10,8 +10,4 @@ services:
     volumes:
       - ./data:/data/db    # Mount the local "data" folder to the MongoDB data directory
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root   # MongoDB root username
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword # MongoDB root password
-
-volumes:
-  mongodb_data:             # Named volume for data persistence (optional if you use a host volume)
+      MONGO_INITDB_DATABASE: db
