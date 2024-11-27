@@ -51,6 +51,7 @@ monorepo-root/
 #### **1. Database Setup**
 - Run migrations and generate Prisma client:
   ```bash
+  cp ./apps/backend/.env.example ./apps/backend/.env
   npm run db
   ```
   This will:
