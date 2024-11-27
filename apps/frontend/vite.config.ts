@@ -14,7 +14,7 @@ export default defineConfig({
   },
   test: {
     alias: {
-      '@/': new URL('./src/', import.meta.url).pathname,
+      '@/': new URL('./apps/frontend/src/', import.meta.url).pathname,
     },
     environment: 'jsdom',
     include: ['**/*.test.*', '**/*.spec.*'],
