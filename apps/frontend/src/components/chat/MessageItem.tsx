@@ -18,7 +18,7 @@ const MessageBubble = styled(Box)<{ issender: string | undefined }>(({ theme, is
     maxWidth: '60%',
     padding: theme.spacing(1.5),
     borderRadius: theme.spacing(2),
-    backgroundColor: issender ? theme.palette.primary.main : theme.palette.grey[300],
+    backgroundColor: issender ? theme.palette.primary.main : theme.palette.mode === 'light' ? theme.palette.grey[300] : '#333333',
     color: issender ? theme.palette.primary.contrastText : theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     display: 'flex',

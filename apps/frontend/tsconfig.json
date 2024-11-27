@@ -23,7 +23,7 @@
 
     /* Paths */
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*", "./apps/frontend/src/*"]
     },
 
     /* Type checking */
