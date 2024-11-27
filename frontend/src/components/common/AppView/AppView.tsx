@@ -12,7 +12,7 @@ const AppView: FunctionComponent<PropsWithChildren<StackProps>> = ({ children, m
   const minWidthToRender = onSmallScreens ? '100%' : (minWidth ?? CONTENT_MIN_WIDTH);
 
   return (
-    <Stack alignSelf="center" gap={2} maxWidth={CONTENT_MAX_WIDTH} minWidth={minWidthToRender} {...restOfProps} flex={1} width="100%">
+    <Stack alignSelf="center" gap={2} maxWidth={CONTENT_MAX_WIDTH} minWidth={minWidthToRender} {...restOfProps} flex={1} width="100%" height="100%">
       {children}
     </Stack>
   );
