@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "prisma:generate": "npx prisma generate",
+    "prisma:generate": "prisma generate",
     "db:run": "docker compose up -d",
-    "dev": "npx ts-node src/server.ts"
+    "dev": "npx ts-node src/server.ts",
+    "db:setup": "npm run db:run"
   },
   "keywords": [],
   "author": "",
