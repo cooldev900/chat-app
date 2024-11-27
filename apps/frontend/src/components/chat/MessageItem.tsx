@@ -7,19 +7,19 @@ interface MessageItemProps {
   isSender: boolean; // True if the message is sent by the current user
 }
 
-const Container = styled(Box)<{ isSender: boolean }>(({ theme, isSender }) => ({
+const Container = styled(Box)<{ issender: string | undefined }>(({ theme, issender }) => ({
   display: 'flex',
-  justifyContent: isSender ? 'flex-end' : 'flex-start',
+  justifyContent: issender ? 'flex-end' : 'flex-start',
   marginBottom: theme.spacing(2),
   width: '100%'
 }));
 
-const MessageBubble = styled(Box)<{ isSender: boolean }>(({ theme, isSender }) => ({
+const MessageBubble = styled(Box)<{ issender: string | undefined }>(({ theme, issender }) => ({
     maxWidth: '60%',
     padding: theme.spacing(1.5),
     borderRadius: theme.spacing(2),
-    backgroundColor: isSender ? theme.palette.primary.main : theme.palette.grey[300],
-    color: isSender ? theme.palette.primary.contrastText : theme.palette.text.primary,
+    backgroundColor: issender ? theme.palette.primary.main : theme.palette.grey[300],
+    color: issender ? theme.palette.primary.contrastText : theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     display: 'flex',
     flexDirection: 'column',
@@ -37,8 +37,8 @@ const SenderName = styled(Typography)(({ theme }) => ({
 
 const MessageItem: React.FC<MessageItemProps> = ({ name, message, isSender }) => {
   return (
-    <Container isSender={isSender}>
-      <MessageBubble isSender={isSender}>
+    <Container issender={isSender ? isSender.toString() : undefined}>
+      <MessageBubble issender={isSender ? isSender.toString() : undefined}>
         {!isSender && <SenderName>{name}</SenderName>}
         <Typography>{message}</Typography>
       </MessageBubble>
